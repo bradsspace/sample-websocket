@@ -13,14 +13,9 @@ const server = createServer(app);
 const wss = new WebSocket.Server({ server });
 
 wss.on('connection', function (ws) {
-  const id = setInterval(function () {
-    ws.send(JSON.stringify(process.memoryUsage()), function () {
-      //
-      // Ignore errors.
-      //
-    });
-  }, 100);
+  ws.send("connected to WSS");
   console.log('started client interval');
+
 
   ws.on('close', function () {
     console.log('stopping client interval');
@@ -31,3 +26,4 @@ wss.on('connection', function (ws) {
 server.listen(8080, function () {
   console.log('Listening on http://0.0.0.0:8080');
 });
+
