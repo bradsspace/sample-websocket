@@ -14,6 +14,8 @@ const wss = new WebSocket.Server({ server });
 
 wss.on('connection', function (ws) {
   ws.send("connected to WSS");
+  wss.clients.add(ws);
+  console.log(wss.clients);
   console.log('started client interval');
 
   ws.on('message', function incoming(message) {
