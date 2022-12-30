@@ -6,6 +6,20 @@ const { createServer } = require('http');
 
 const WebSocket = require('ws');
 
+app.post('/api/data', (req, res) => {
+  const data = req.body; // request body is parsed as JSON by default
+
+  // validate the data
+  if (data.key !== 'value') {
+    return res.status(400).send({error: 'Invalid data'});
+  }
+
+  // store the data in a database
+  db.save(data);
+
+  res.send({success: true});
+});
+
 const app = express();
 app.use(express.static(path.join(__dirname, '/public')));
 
