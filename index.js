@@ -18,7 +18,7 @@ wss.on('connection', function (ws) {
 
   ws.on('message', function incoming(message) {
     console.log('received: %s', message);
-    ws.send(message);
+    ws.send(message.toString());
   });
 
   
