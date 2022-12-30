@@ -15,12 +15,19 @@ const wss = new WebSocket.Server({ server });
 wss.on('connection', function (ws) {
   ws.send("connected to WSS");
   wss.clients.add(ws);
-  console.log(wss.clients,length);
+  //console.log(wss.clients.length);
   console.log('started client interval');
 
   ws.on('message', function incoming(message) {
     console.log('received: %s', message);
     ws.send(message.toString());
+
+    wss.clients.forEach(function each(client) {
+      if (client !== ws && client.readyState === WebSocket.OPEN) {
+        client.send(test);
+      }
+      
+    });
   });
 
   
